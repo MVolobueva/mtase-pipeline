@@ -1,0 +1,10 @@
+## Metadata line
+##   one more metadata line
+#:ID	Entry	Entry name	Status	Protein names	Organism	Length	Cross-reference (Pfam)	Taxonomic lineage (SPECIES)	EC number
+1boo	P11409	MTP2_PROHU	reviewed	Modification methylase PvuII (M.PvuII) (EC 2.1.1.113) (N-4 cytosine-specific methyltransferase PvuII)	Proteus hauseri	336	PF01555;	Proteus hauseri	2.1.1.113
+1g60	P23192	MTM2_MORBO	reviewed	Modification methylase MboII (M.MboII) (EC 2.1.1.72) (Adenine-specific methyltransferase MboII) (DNA MTase MboIIA)	Moraxella bovis	260	PF01555;	Moraxella bovis	2.1.1.72
+1q0s	P04392	DMA_BPT4	reviewed	DNA adenine methylase (EC 2.1.1.72) (DNA-(N(6)-adenine)-methyltransferase) (Deoxyadenosyl-methyltransferase) (M.EcoT4Dam)	Enterobacteria phage T4 (Bacteriophage T4)	259	PF02086;	Enterobacteria phage T4 (Bacteriophage T4)	2.1.1.72
+2ar0	P08957	T1MK_ECOLI	reviewed	Type I restriction enzyme EcoKI M protein (M.EcoKI) (EC 2.1.1.72)	Escherichia coli (strain K12)	529	PF02384;	Escherichia coli	2.1.1.72
+2dpm	P04043	MTD21_STREE	reviewed	Modification methylase DpnIIA (M.DpnIIA) (EC 2.1.1.72) (Adenine-specific methyltransferase DpnIIA) (M.DpnII 1)	Streptococcus pneumoniae	284	PF02086;	Streptococcus pneumoniae	2.1.1.72
+2f8l	Q8Y6U9	Q8Y6U9_LISMO	unreviewed	Lmo1582 protein	Listeria monocytogenes serovar 1/2a (strain ATCC BAA-679 / EGD-e)	332	PF02384;		
+	P14385	MTTA_THEAQ	reviewed	Modification methylase TaqI (M.TaqI) (EC 2.1.1.72) (Adenine-specific methyltransferase TaqI)	Thermus aquaticus	421	PF07669;PF12950;	Thermus aquaticus	
