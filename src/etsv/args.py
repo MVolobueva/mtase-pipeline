@@ -5,7 +5,7 @@ import argparse
 import sys
 from contextlib import suppress
 
-from etsv import ETSVReader, ETSVWriter
+from .main import ETSVReader, ETSVWriter
 
 
 class ETSVType:
