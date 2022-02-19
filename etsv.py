@@ -32,7 +32,10 @@ class Field:
         return self.header
 
     def __eq__(self, obj: Any) -> bool:
-        return self.name == obj
+        try:
+            return self.name == obj.name
+        except AttributeError:
+            return False
 
     def __hash__(self) -> int:
         return hash(self.name)
@@ -45,15 +48,15 @@ class InputField(Field):
     requred to parse values from this column.
     """
 
-    index: int
+    index: Optional[int]
 
     def __init__(self, name: str, index_or_header: Union[int, str],
                  value_type: Callable[[str], Any] = str) -> None:
-        super().__init__(name, header=index_or_header)
+        super().__init__(name)
         if isinstance(index_or_header, int):
             self.index = index_or_header
-            self.header = None
         else:
+            self.header = index_or_header
             self.index = None
         self._value_type = value_type
 
@@ -81,7 +84,7 @@ class OutputField(Field): # pylint: disable=too-few-public-methods
     def __init__(self, name: str, header: str,
                  value_format: Union[str, Callable[[Any], str]] = str) -> None:
         super().__init__(name, header=header)
-        if hasattr(value_format, "format"):
+        if isinstance(value_format, str):
             self._value_format = value_format.format
         else:
             self._value_format = value_format
@@ -146,7 +149,7 @@ class ETSVReader:
                 if line.startswith("#:"):
                     self.title = self._split_line(line[2:])
                 elif line.startswith("##"):
-                    self.metadata.append(line[2:])
+                    self.metadata.append(line[2:].strip("\n"))
                 line = next(self._iterator)
             self._iterator.step_back()
         if not self.title and self._params["force_title"]:
@@ -169,7 +172,7 @@ class ETSVReader:
         vals = self._split_line(line)
         return dict(field.parse_value(vals) for field in self._fields)
 
-    def readline(self):
+    def read_entry(self):
         """Read a next line and parse it."""
         return next(self, None)
 
@@ -196,7 +199,7 @@ class ETSVWriter: # pylint: disable=too-few-public-methods
         self._fileobj = fileobj
         self._fields = fields
 
-    def writeline(self, vals):
+    def write_entry(self, vals):
         """Write TSV values to the file as a line."""
         print(*(field.format_value(vals) for field in self._fields),
               sep="\t", file=self._fileobj)
