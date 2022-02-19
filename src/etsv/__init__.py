@@ -9,3 +9,5 @@ __all__ = [
     SetETSVParameter, StoreETSVType,
     add_etsv_options, add_field_options,
 ]
+
+__version__ = "{major}.{minor}.{micro}".format(major=0, minor=0, micro=2)
