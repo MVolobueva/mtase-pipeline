@@ -11,13 +11,14 @@ st.sidebar.write('## Step 1')
 uploaded_file = st.sidebar.file_uploader("Load sequences in fasta format")
 if uploaded_file is not None:
     with open(os.path.join("TempDir",uploaded_file.name),"wb") as f:
-         f.write(uploaded_file.getbuffer())                                  
+         f.write(uploaded_file.getbuffer())
+    print(os.path.join("./TempDir",uploaded_file.name))                                
     os.system('hmmsearch --cpu 3 -E 0.01 --domE 0.01 --incE 0.01 --incdomE 0.01 \
         -o /dev/null --noali -A ./pipelineFiles/file.stk\
         ./pipelineFiles/selected_profiles.hmm ' + os.path.join("TempDir",uploaded_file.name))
     st.sidebar.write('Step 1 finished')
     st.sidebar.write('## Step 2')
-    os.system('rm ' + os.path.join("TempDir",uploaded_file.name))                             
+    os.system('rm ' + os.path.join("./TempDir",uploaded_file.name))                             
     os.system('./pipelineFiles/get_aln_regions.py \
     ./pipelineFiles/All_profile_region.csv \
     ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
