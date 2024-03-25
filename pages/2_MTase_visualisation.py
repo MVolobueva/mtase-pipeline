@@ -49,7 +49,7 @@ option = 'M.HhaI'
 k = 1
 if uploaded_file is not None:
     k = 0
-    df = pd.read_csv(uploaded_file, sep = None, index_col=0)
+    df = pd.read_csv(uploaded_file, sep = None)
     option = st.selectbox(
     'What MTase would you like to analyse?',
     df['REBASE_name'],
