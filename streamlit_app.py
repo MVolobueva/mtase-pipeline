@@ -25,7 +25,7 @@ if uploaded_file is not None:
     st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
-    st.write(os.system('chmod 777 ./pipelineFiles/classification.py')
+    st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
     st.write(os.system('./pipelineFiles/classification.py --t ./pipelineFiles/region_alignments.tsv --m ./pipelineFiles/several_cat_domains.tsv --c ./pipelineFiles/class.tsv'))
 
     st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
