@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import os
-import etsv
 
 ##step 1
 #os.system('python3 -m pip install -e etsv')
