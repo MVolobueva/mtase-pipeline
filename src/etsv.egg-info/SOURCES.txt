@@ -1,0 +1,10 @@
+pyproject.toml
+setup.cfg
+src/etsv/__init__.py
+src/etsv/args.py
+src/etsv/main.py
+src/etsv.egg-info/PKG-INFO
+src/etsv.egg-info/SOURCES.txt
+src/etsv.egg-info/dependency_links.txt
+src/etsv.egg-info/top_level.txt
+tests/test_main.py
