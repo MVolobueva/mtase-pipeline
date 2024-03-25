@@ -16,15 +16,19 @@ if uploaded_file is not None:
         -o /dev/null --noali -A ./pipelineFiles/file.stk\
         ./pipelineFiles/selected_profiles.hmm ' + os.path.join("TempDir",uploaded_file.name))
     st.sidebar.write('Step 1 finished')
-    st.sidebar.write('## Step 2')                                   
+    st.sidebar.write('## Step 2')
+    os.system('rm ' + os.path.join("TempDir",uploaded_file.name))                             
     os.system('./pipelineFiles/get_aln_regions.py \
     ./pipelineFiles/All_profile_region.csv \
     ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
+    st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
-    
+    os.system('python ./pipelineFiles/classification.py \
+  --t ./pipelineFiles/region_alignments.tsv\
+  --m ./pipelineFiles/several_cat_domains.tsv\
+  --c ./pipelineFiles/class.tsv')
 
-#dddkk
+    st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
 
-#st.write(k)
-#st.write(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
+    st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t'))
