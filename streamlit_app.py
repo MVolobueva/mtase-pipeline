@@ -10,7 +10,7 @@ st.sidebar.title("Pipeline steps")
 st.sidebar.write('## Step 1')
 uploaded_file = st.sidebar.file_uploader("Load sequences in fasta format")
 if uploaded_file is not None:
-    with open(os.path.join("TempDir",uploaded_file.name),"wb") as f:
+    with open(os.path.join("./TempDir",uploaded_file.name),"wb") as f:
          f.write(uploaded_file.getbuffer())
     print(os.path.join("./TempDir",uploaded_file.name))                                
     os.system('hmmsearch --cpu 3 -E 0.01 --domE 0.01 --incE 0.01 --incdomE 0.01 \
