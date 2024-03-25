@@ -30,6 +30,6 @@ if uploaded_file is not None:
   --m ./pipelineFiles/several_cat_domains.tsv\
   --c ./pipelineFiles/class.tsv')
 
-    st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
+    st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
 
     st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t'))
