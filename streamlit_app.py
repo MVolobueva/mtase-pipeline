@@ -4,7 +4,8 @@ import os
 import etsv
 
 ##step 1
-
+os.system('git clone https://github.com/isrusin/etsv')
+os.system('python3 -m pip install -e etsv')
 st.write('# MTase detection and classification pipeline')
 st.sidebar.title("Pipeline steps")
 st.sidebar.write('## Step 1')
