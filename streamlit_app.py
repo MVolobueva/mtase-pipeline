@@ -199,12 +199,14 @@ if uploaded_file is not None:
     os.system('./pipelineFiles/get_aln_regions.py \
     ./pipelineFiles/All_profile_region.csv \
     ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
+    st.sidebar.write('## Step 2 output')
     st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
+    st.sidebar.write('Step 3 finished')
     #st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
-    st.write(os.system('./pipelineFiles/classification.py'))
     main()
-    st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
-
-    st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t'))
+    st.write('## Step 3 output - classified MTases')
+    st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t', index_col = 0))
+    st.write('## Step 3 output - MTases with several catalytic domains')
+    st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
