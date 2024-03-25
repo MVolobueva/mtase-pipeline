@@ -1,0 +1,2 @@
+	REBASE_name	Model_ID	Regions	Region_coords	aligned_percent	Region_count	Aligned_percent	New_class
+0	3S1S_1|Chain	54378	Hd3-S5,sam_motif,Hd2-Hd1,S7-S4,cat_motif,Hu2-S1	299-326,327-334,335-383,383-405,406-409,410-519	1.0,1.0,0.7454545454545455,1.0,1.0,1.0	5	0.9575757575757576	A

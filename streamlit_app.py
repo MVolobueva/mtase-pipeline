@@ -4,7 +4,7 @@ import os
 import etsv
 
 ##step 1
-os.system('python3 -m pip install -e etsv')
+#os.system('python3 -m pip install -e etsv')
 st.write('# MTase detection and classification pipeline')
 st.sidebar.title("Pipeline steps")
 st.sidebar.write('## Step 1')
@@ -25,10 +25,10 @@ if uploaded_file is not None:
     st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
-    os.system('python ./pipelineFiles/classification.py \
+    st.write(os.system('python ./pipelineFiles/classification.py \
   --t ./pipelineFiles/region_alignments.tsv\
   --m ./pipelineFiles/several_cat_domains.tsv\
-  --c ./pipelineFiles/class.tsv')
+  --c ./pipelineFiles/class.tsv'))
 
     st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
 
