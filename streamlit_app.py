@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import os
+import re
+
 # function for calculating percent of aligned aa
 def aligned_percent(frags):
     return len(re.findall(r'[A-Z]',frags))/(len(re.findall(r'-',frags))+len(re.findall(r'[A-Z]',frags)))
