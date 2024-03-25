@@ -109,24 +109,26 @@ def set_of_regions(df):
     # manipulation with table
     df = df.reset_index()
     df.columns = df.columns.droplevel(1)
+    try:
+        #filter region names that comtain only one sam-motif and only one cat-motif
+        df = df[(df['Region_name'].str.count('sam_motif') == 1) & (df['Region_name'].str.count('cat_motif') == 1)]
 
-    #filter region names that comtain only one sam-motif and only one cat-motif
-    df = df[(df['Region_name'].str.count('sam_motif') == 1) & (df['Region_name'].str.count('cat_motif') == 1)]
+        #cut out false regions
+        df['Region1'] = df.apply(lambda x: filter_dublicates_1(x['Region_name'], x['Region_coords']), axis=1)
+        df['Region_coord1'] = df.apply(lambda x: filter_dublicates_2(x['Region_name'], x['Region_coords']), axis=1)
+        df['Regions'] = df.apply(lambda x: filter_dublicates_3(x['Region1'], x['Region_coord1']), axis=1)
+        df['Region_coords'] = df.apply(lambda x: filter_dublicates_4(x['Region1'], x['Region_coord1']), axis=1)
+        df = df[['REBASE_name', 'Model_ID', 'Regions', 'Region_coords', 'aligned_percent']]
+        
+        #count number of regions-1
+        df['Region_count'] = df['Regions'].str.count(',')
 
-    #cut out false regions
-    df['Region1'] = df.apply(lambda x: filter_dublicates_1(x['Region_name'], x['Region_coords']), axis=1)
-    df['Region_coord1'] = df.apply(lambda x: filter_dublicates_2(x['Region_name'], x['Region_coords']), axis=1)
-    df['Regions'] = df.apply(lambda x: filter_dublicates_3(x['Region1'], x['Region_coord1']), axis=1)
-    df['Region_coords'] = df.apply(lambda x: filter_dublicates_4(x['Region1'], x['Region_coord1']), axis=1)
-    df = df[['REBASE_name', 'Model_ID', 'Regions', 'Region_coords', 'aligned_percent']]
-    
-    #count number of regions-1
-    df['Region_count'] = df['Regions'].str.count(',')
-
-    #calculate average aligned percent for all regions
-    df['Aligned_percent'] = df['aligned_percent'].apply(
-        lambda x: sum([float(x) for x in x.split(',')]) / len(x.split(',')))
-    return df
+        #calculate average aligned percent for all regions
+        df['Aligned_percent'] = df['aligned_percent'].apply(
+            lambda x: sum([float(x) for x in x.split(',')]) / len(x.split(',')))
+        return df
+    except:
+        return 'No MTase'
 
 #function for choosing best profile  - step 4 in pipline step 3
 def best_profile(df):
@@ -174,12 +176,12 @@ def main():
     t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
-    df1 = df.copy()#.to_csv('./pipelineFiles/withFragments.tsv', sep='\t')
+    if df != 'No MTase':
     # step 4 in pipline step 3
-    df = best_profile(df)
-    # step 5 in pipline step 3
-    df['New_class'] = df.apply(lambda x: assign_class(x[1], x[2], x[3]), axis=1)
-    df.to_csv('./pipelineFiles/class.tsv', sep='\t')
+        df = best_profile(df)
+        # step 5 in pipline step 3
+        df['New_class'] = df.apply(lambda x: assign_class(x[1], x[2], x[3]), axis=1)
+        df.to_csv('./pipelineFiles/class.tsv', sep='\t')
 
 ##step 1
 #os.system('python3 -m pip install -e etsv')
@@ -214,5 +216,4 @@ if uploaded_file is not None:
         st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
     else:
         st.write('No catalytic domain were found')
-        st.write('MTase fragments')
-        st.dataframe(df1)
+
