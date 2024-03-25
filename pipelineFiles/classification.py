@@ -2,7 +2,6 @@
 
 import pandas as pd
 import re
-import argparse
 
 # function for calculating percent of aligned aa
 def aligned_percent(frags):
@@ -167,31 +166,21 @@ def assign_class(model_id, regions, region_coords):
     return '-'
 
 def main():
-    #make parser
-    parser = argparse.ArgumentParser()
-    #add argumnet from console
-    parser.add_argument("--table-with-profile-region-hits")
-    parser.add_argument("--more-than-one-cat-domain")
-    parser.add_argument("--class-output")
-    args = parser.parse_args()
-    #print(args)
-    df = pd.read_csv(args.table_with_profile_region_hits, sep='\t')
+    df = pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t')
     #step 1 in pipline step 3
     df = region_filtration(df)
     # step 2 in pipline step 3
     t = sequence_filtration(df)
-    t[1].to_csv(args.more_than_one_cat_domain, sep='\t')
+    t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
     # step 4 in pipline step 3
     df = best_profile(df)
     # step 5 in pipline step 3
     df['New_class'] = df.apply(lambda x: assign_class(x[1], x[2], x[3]), axis=1)
-    df.to_csv(args.class_output, sep='\t')
+    df.to_csv('./pipelineFiles/class.tsv', sep='\t')
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
     print('Finish')
-
-
