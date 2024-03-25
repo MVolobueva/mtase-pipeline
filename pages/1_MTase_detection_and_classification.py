@@ -174,6 +174,7 @@ def main():
     t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
+    df1 = df.copy()#.to_csv('./pipelineFiles/withFragments.tsv', sep='\t')
     # step 4 in pipline step 3
     df = best_profile(df)
     # step 5 in pipline step 3
@@ -207,9 +208,11 @@ if uploaded_file is not None:
     #st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
     main()
     st.write('## Step 3 output - classified MTases')
-    if pd.read_csv('./pipelineFiles/class.tsv', sep='\t', index_col = 0):
+    if os.path.exists('./pipelineFiles/class.tsv'):
         st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t', index_col = 0))
         st.write('## Step 3 output - MTases with several catalytic domains')
         st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
     else:
         st.write('No catalytic domain were found')
+        st.write('MTase fragments')
+        st.dataframe(df1)
