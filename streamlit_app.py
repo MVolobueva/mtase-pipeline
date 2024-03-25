@@ -18,7 +18,7 @@ if uploaded_file is not None:
         ./pipelineFiles/selected_profiles.hmm ' + os.path.join("TempDir",uploaded_file.name))
     st.sidebar.write('Step 1 finished')
     st.sidebar.write('## Step 2')
-    os.system('rm ' + os.path.join("./TempDir",uploaded_file.name))                             
+    os.system('rm ' + os.path.join(".",uploaded_file.name))                             
     os.system('./pipelineFiles/get_aln_regions.py \
     ./pipelineFiles/All_profile_region.csv \
     ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
