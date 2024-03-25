@@ -26,13 +26,7 @@ if uploaded_file is not None:
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
     #st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
-    try : 
-      st.write(os.system('./pipelineFiles/classification.py --t ./pipelineFiles/region_alignments.tsv --m ./pipelineFiles/several_cat_domains.tsv --c ./pipelineFiles/class.tsv'))  
-     
-    except OSError as error : 
-      st.write(error)
-      print("File descriptor is not associated with any terminal device") 
-    #st.write(os.system('./pipelineFiles/classification.py --t ./pipelineFiles/region_alignments.tsv --m ./pipelineFiles/several_cat_domains.tsv --c ./pipelineFiles/class.tsv'))
+    st.write(os.system('./classification.py --t ./pipelineFiles/region_alignments.tsv --m ./pipelineFiles/several_cat_domains.tsv --c ./pipelineFiles/class.tsv'))
 
     st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t'))
 
