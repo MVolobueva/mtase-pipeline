@@ -15,7 +15,7 @@ if uploaded_file is not None:
     print(os.path.join(".",uploaded_file.name))                                
     os.system('hmmsearch --cpu 3 -E 0.01 --domE 0.01 --incE 0.01 --incdomE 0.01 \
         -o /dev/null --noali -A ./pipelineFiles/file.stk\
-        ./pipelineFiles/selected_profiles.hmm ' + os.path.join("TempDir",uploaded_file.name))
+        ./pipelineFiles/selected_profiles.hmm ' + os.path.join(".",uploaded_file.name))
     st.sidebar.write('Step 1 finished')
     st.sidebar.write('## Step 2')
     os.system('rm ' + os.path.join(".",uploaded_file.name))                             
