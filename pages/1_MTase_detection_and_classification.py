@@ -176,7 +176,7 @@ def main():
     t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
-    if not df.isinstance(x,str):
+    if not isinstance(df,str):
     # step 4 in pipline step 3
         df = best_profile(df)
         # step 5 in pipline step 3
