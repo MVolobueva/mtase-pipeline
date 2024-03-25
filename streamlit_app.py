@@ -1,8 +1,7 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="DNA methyltransferase",
-    page_icon="👋",
+    page_title="DNA methyltransferase"
 )
 
 st.write("# Welcome DNA methyltransferase (MTases) site!")
