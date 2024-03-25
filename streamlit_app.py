@@ -7,5 +7,5 @@ k = os.system('./pipelineFiles/get_aln_regions.py \
   ./pipelineFiles/All_profile_region.csv \
   ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
 
-
+#ddd
 st.write(k)
