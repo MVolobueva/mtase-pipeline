@@ -199,7 +199,7 @@ if uploaded_file is not None:
     os.system('./pipelineFiles/get_aln_regions.py \
     ./pipelineFiles/All_profile_region.csv \
     ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
-    st.sidebar.write('## Step 2 output')
+    st.write('## Step 2 output')
     st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
     st.sidebar.write('Step 2 finished')
     st.sidebar.write('## Step 3')
