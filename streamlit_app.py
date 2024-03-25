@@ -3,10 +3,28 @@ import pandas as pd
 import os
 import etsv
 
-k = os.system('./pipelineFiles/get_aln_regions.py \
-  ./pipelineFiles/All_profile_region.csv \
-  ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
+##step 1
+
+st.write('# MTase detection and classification pipeline')
+st.sidebar.title("Pipeline steps")
+st.sidebar.write('## Step 1')
+uploaded_file = st.sidebar.file_uploader("Load sequences in fasta format")
+if uploaded_file is not None:
+    with open(os.path.join("TempDir",uploaded_file.name),"wb") as f:
+         f.write(uploaded_file.getbuffer())                                  
+    os.system('hmmsearch --cpu 3 -E 0.01 --domE 0.01 --incE 0.01 --incdomE 0.01 \
+        -o /dev/null --noali -A ./pipelineFiles/file.stk\
+        ./pipelineFiles/selected_profiles.hmm ' + os.path.join("TempDir",uploaded_file.name))
+    st.sidebar.write('Step 1 finished')
+    st.sidebar.write('## Step 2')                                   
+    os.system('./pipelineFiles/get_aln_regions.py \
+    ./pipelineFiles/All_profile_region.csv \
+    ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
+    st.sidebar.write('Step 2 finished')
+    st.sidebar.write('## Step 3')
+    
 
 #dddkk
 
-st.write(k)
+#st.write(k)
+#st.write(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
