@@ -48,7 +48,7 @@ st.markdown(
 st.markdown(
     f"## MTase catalytic domain architecture")
 st.write('With designations of secondary structure elements')
-st.image('/workspaces/mtase-pipeline/pipelineFiles/cat-domain.PNG')
+st.image('pipelineFiles/cat-domain.png')
 option = 'M.HhaI'
 k = 1
 if uploaded_file is not None:

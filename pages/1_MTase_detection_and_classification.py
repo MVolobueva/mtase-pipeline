@@ -243,4 +243,4 @@ st.markdown(
         """
 )
 
-st.image('/workspaces/mtase-pipeline/pipelineFiles/algorithm.PNG')
+st.image('pipelineFiles/algorithm.png')
