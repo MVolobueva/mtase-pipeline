@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 #st.set_page_config(
 #    page_title="DNA-MTases"
 #)
@@ -13,6 +14,21 @@ import streamlit as st
 
 st.write("# Welcome DNA methyltransferase (MTases) site!")
 
+st.markdown(
+        """
+        These site devoted to prokaryotic DNA Methyltransferases (МТases). 
+        ### Site structure
+
+        - Brief overview of MTases structure and classes  
+        - Running MTase detection and classification [pipeline](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_detection_and_classification)
+        - Visualization of pipeline [results](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_visualisation)
+        ### Overview
+        MTases are classified into [10 classes](https://www.biorxiv.org/content/10.1101/2023.12.13.571470v1).
+        All class are grouped into 10 groups on sequence similarity of catalytic motif (figure below).
+
+    """
+    st.image('pipelineFiles/Abstract_2.jpg')
+    )
 
 st.markdown(
     """
