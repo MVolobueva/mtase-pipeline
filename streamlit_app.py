@@ -27,11 +27,6 @@ st.markdown(
         All class are grouped into 10 groups on sequence similarity of catalytic motif (figure below).
 
     """
-    st.image('pipelineFiles/Abstract_2.jpg')
     )
 
-st.markdown(
-    """
-
-"""
-)
+st.image('pipelineFiles/Abstract_2.jpg')
