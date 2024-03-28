@@ -46,9 +46,7 @@ uploaded_file_pdb = st.sidebar.file_uploader("Choose PBD file")
 st.markdown(
     f"# DNA-methyltransferases classes")
 st.markdown(
-    f"## MTase catalytic domain architecture")
-st.write('With designations of secondary structure elements')
-st.image('pipelineFiles/cat-domain.png')
+
 option = 'M.HhaI'
 k = 1
 if uploaded_file is not None:
@@ -157,3 +155,8 @@ if k!= 0:
     color_MTase(df)
 
     showmol(view, height=height, width=width)
+    f"## MTase catalytic domain architecture")
+
+
+st.write('With designations of secondary structure elements')
+st.image('pipelineFiles/cat-domain.png')
