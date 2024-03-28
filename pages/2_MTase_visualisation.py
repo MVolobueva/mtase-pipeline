@@ -9,7 +9,7 @@ import pandas as pd
 #color MTase chain in red
 def color_MTase(df):
     MTasechain = {'chain':hl_chain}
-    view.setStyle(MTasechain,{'cartoon':{'color':'blue'}})
+    view.setStyle(MTasechain,{'cartoon':{'color':'yellow'}})
     #view.addResLabels({"chain": hl_chain,"resi": 1-10})
 
     a = tuple(df[df['REBASE_name'] == option].iloc[0]['Region_coords'].split(','))
@@ -27,10 +27,10 @@ def color_MTase(df):
             if l == 'sam_motif' or l == 'cat_motif':
 
                 for k in range(int(i.split('-')[0]), int(i.split('-')[1]) + 1):
-                    view.setStyle({'resi': k, 'chain': hl_chain}, {'cartoon': {'color': 'red'}})
+                    view.setStyle({'resi': k, 'chain': hl_chain}, {'cartoon': {'color': 'blue'}})
             else:
                 for k in range(int(i.split('-')[0]), int(i.split('-')[1]) + 1):
-                    view.setStyle({'resi': k, 'chain': hl_chain}, {'cartoon': {'color': 'yellow'}})
+                    view.setStyle({'resi': k, 'chain': hl_chain}, {'cartoon': {'color': 'red'}})
             i1 = int(i.split('-')[1])
             l1 =  l
     else:
@@ -44,7 +44,11 @@ uploaded_file = st.sidebar.file_uploader("Choose a file with MTase classes\
     from [MTase classification pipline](https://github.com/MVolobueva/MTase-classification/blob/main/Classification_pipeline.ipynb) or classified MTases from [MTase detection and classification](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_detection_and_classification)")
 uploaded_file_pdb = st.sidebar.file_uploader("Choose PBD file")
 st.markdown(
-    f"# DNA-methyltransferases (MTases) classes")
+    f"# DNA-methyltransferases classes")
+st.markdown(
+    f"## MTase catalytic domain architecture")
+st.write('With designations of secondary structure elements')
+st.image('/workspaces/mtase-pipeline/pipelineFiles/cat-domain.PNG')
 option = 'M.HhaI'
 k = 1
 if uploaded_file is not None:
@@ -121,8 +125,8 @@ cartoon_radius = 0.2
 stick_radius = 0.2
 
 if k!= 0:
-    st.write('MTase chain is green. Sam-motif and cat-motif are red.\
-     Elements detected by hmm-profiles are yellow.\
+    st.write('MTase chain is yellow. Sam-motif and cat-motif are blue.\
+     Elements detected by hmm-profiles are red.\
      Loops between detected elements are green.')
     if uploaded_file_pdb is not None and not pdb_code:
         view = stmol.obj_upload(uploaded_file_pdb)

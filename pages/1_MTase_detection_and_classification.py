@@ -197,23 +197,50 @@ if uploaded_file is not None:
         -o /dev/null --noali -A ./pipelineFiles/file.stk\
         ./pipelineFiles/selected_profiles.hmm ' + os.path.join(".",uploaded_file.name))
     st.sidebar.write('Step 1 finished')
-    st.sidebar.write('## Step 2')
-    os.system('rm ' + os.path.join(".",uploaded_file.name))                             
-    os.system('./pipelineFiles/get_aln_regions.py \
-    ./pipelineFiles/All_profile_region.csv \
-    ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
-    st.write('## Step 2 output')
-    st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
-    st.sidebar.write('Step 2 finished')
-    st.sidebar.write('## Step 3')
-    st.sidebar.write('Step 3 finished')
-    #st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
-    main()
-    st.write('## Step 3 output - classified MTases')
-    if os.path.exists('./pipelineFiles/class.tsv'):
-        st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t', index_col = 0))
-        st.write('## Step 3 output - MTases with several catalytic domains')
-        st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
-    else:
-        st.write('No catalytic domain were found')
+    try:
+        st.sidebar.write('## Step 2')
+        os.system('rm ' + os.path.join(".",uploaded_file.name))                             
+        os.system('./pipelineFiles/get_aln_regions.py \
+        ./pipelineFiles/All_profile_region.csv \
+        ./pipelineFiles/file.stk > ./pipelineFiles/region_alignments.tsv')
+        st.write('## Step 2 output')
+        st.dataframe(pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t'))
+        st.sidebar.write('Step 2 finished')
+        st.sidebar.write('## Step 3')
+        st.sidebar.write('Step 3 finished')
+        #st.write(os.system('chmod 777 ./pipelineFiles/classification.py'))
+        main()
+        st.write('## Step 3 output - classified MTases')
+        if os.path.exists('./pipelineFiles/class.tsv'):
+            st.dataframe(pd.read_csv('./pipelineFiles/class.tsv', sep='\t', index_col = 0))
+            st.write('## Step 3 output - MTases with several catalytic domains')
+            st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
+        else:
+            st.write('No catalytic domain were found')
+    except:
+        st.write(':red [No catalytic domain were found]')
 
+st.markdown(
+        """
+        MTase detection and classification [pipline](https://github.com/MVolobueva/MTase-classification/) consits of 3 steps:
+        - **HMMer search**
+
+
+        The step uses 12 selected HMM-profiles for detection MTase catalytic domain.
+        - **Region detection**
+
+
+        In the profiles for available and predicted structures, areas of secondary structure were marked (each profile was marked into 6 sections). The script cuts out the marked sections.
+        - **Classification**
+
+
+        Based on the found areas, the sequences that contain the catalytic MTase domain are determined.
+
+        ### Pipeline diagram
+
+
+
+        """
+)
+
+st.image('/workspaces/mtase-pipeline/pipelineFiles/algorithm.PNG')

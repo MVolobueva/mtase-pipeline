@@ -25,7 +25,6 @@ st.markdown(
         ### Overview
         MTases are classified into [10 classes](https://www.biorxiv.org/content/10.1101/2023.12.13.571470v1).
         All class are grouped into 10 groups on sequence similarity of catalytic motif (figure below).
-
     """
     )
 
