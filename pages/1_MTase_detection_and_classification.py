@@ -238,7 +238,7 @@ st.markdown(
 
         Based on the found areas, the sequences that contain the catalytic MTase domain are determined.
 
-        ### Pipeline diagram
+        ### Pipeline scheme
 
 
 
