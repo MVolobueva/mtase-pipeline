@@ -20,7 +20,7 @@ debugpy==1.8.1
 decorator==5.1.1
 defusedxml==0.7.1
 deprecation==2.1.0
--e git+https://github.com/isrusin/etsv.git@67bbef0c1e35dac2d31b56bcdb4e973e0022e502#egg=etsv
+
 executing==2.0.1
 fastjsonschema==2.19.1
 fqdn==1.5.1
