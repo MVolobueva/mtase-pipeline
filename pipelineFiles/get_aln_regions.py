@@ -4,7 +4,8 @@ import gzip
 import sys
 import signal
 from itertools import chain
-
+import sys
+sys.path.append('./etsv')
 import etsv  # ver. 0.0.2
 
 
