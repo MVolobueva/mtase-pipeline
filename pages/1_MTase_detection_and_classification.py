@@ -5,7 +5,7 @@ import re
 import sys
 
 st.write(sys.path)
-st.write(import etsv)
+import etsv
 
 # function for calculating percent of aligned aa
 def aligned_percent(frags):
