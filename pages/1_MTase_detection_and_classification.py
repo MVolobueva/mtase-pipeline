@@ -216,7 +216,7 @@ if uploaded_file is not None:
             st.write('## Step 3 output - MTases with several catalytic domains')
             st.dataframe(pd.read_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t', index_col = 0))
         else:
-            st.write('No catalytic domain were found')
+            st.write(':red[No catalytic domain were found]')
     except:
         st.write(':red[No catalytic domain were found]')
 
