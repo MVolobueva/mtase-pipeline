@@ -5,7 +5,7 @@ import sys
 import signal
 from itertools import chain
 import sys
-sys.path.append('./etsv')
+sys.path.append('./etsv/src/etsv')
 import etsv  # ver. 0.0.2
 
 
