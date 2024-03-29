@@ -2,7 +2,8 @@ import streamlit as st
 import pandas as pd
 import os
 import re
-
+import sys
+st.write(sys.path)
 
 # function for calculating percent of aligned aa
 def aligned_percent(frags):
