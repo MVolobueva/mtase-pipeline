@@ -8,6 +8,7 @@ import sys
 #sys.path.append('./etsv/src/etsv')
 #print(sys.path)
 sys.path.append('./etsv/src/')
+st.write(sys.path)
 import etsv  # ver. 0.0.2
 
 
