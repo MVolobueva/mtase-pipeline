@@ -7,7 +7,7 @@ from itertools import chain
 import sys
 #sys.path.append('./etsv/src/etsv')
 #print(sys.path)
-sys.path.append('"/home/adminuser/venv/src/etsv/src"')
+sys.path.append('/home/adminuser/venv/src/etsv/src')
 import etsv  # ver. 0.0.2
 
 
