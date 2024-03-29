@@ -218,7 +218,7 @@ if uploaded_file is not None:
         else:
             st.write('No catalytic domain were found')
     except:
-        st.write(':red [No catalytic domain were found]')
+        st.write(':red[No catalytic domain were found]')
 
 st.markdown(
         """
