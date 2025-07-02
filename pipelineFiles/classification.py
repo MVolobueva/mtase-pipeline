@@ -175,7 +175,7 @@ def main():
     parser.add_argument("--class-output")
     args = parser.parse_args()
     #print(args)
-    df = pd.read_csv(args.table_with_profile_region_hits, sep='\t')
+    t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     #step 1 in pipline step 3
     df = region_filtration(df)
     # step 2 in pipline step 3
