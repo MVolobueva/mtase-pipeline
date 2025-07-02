@@ -6,7 +6,6 @@ st.set_page_config(
     page_icon=":guardsman:",
 )
 
-st.title("Main Page")  # Заголовок на странице
 
 st.write("# Welcome DNA methyltransferase (MTases) site!")
 
