@@ -84,7 +84,7 @@ if uploaded_file is not None:
         st.markdown(
             f"## MTase {option} from class {df[df['REBASE_name'] == option].iloc[0]['New_class']}: PDB [{pdb_code.upper()}](https://www.rcsb.org/structure/{pdb_code}) (Chain {hl_chain})")
 else:
-    df = pd.read_csv('./class_withStructure1.tsv', sep='\t', index_col=0)
+    df = pd.read_csv('./class_withStructure.tsv', sep='\t', index_col=0)
     st.write('## Prokaryotic MTases with available 3D structure')
     option = st.selectbox(
         'What MTase would you like to analyse?',
