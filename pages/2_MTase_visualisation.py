@@ -41,7 +41,7 @@ def color_MTase(df):
 st.sidebar.title("Settings")
 
 uploaded_file = st.sidebar.file_uploader("Choose a file with MTase classes\
-    from [MTase classification pipline](https://github.com/MVolobueva/MTase-classification/blob/main/Classification_pipeline.ipynb) or classified MTases from [MTase detection and classification](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_detection_and_classification)")
+    from [MTase classification pipline](https://github.com/MVolobueva/MTase-classification/blob/main/Classification_pipeline.ipynb) or classified MTases from [MTase detection and classification](https://mtase-pipeline.streamlit.app/MTase_detection_and_classification)")
 uploaded_file_pdb = st.sidebar.file_uploader("Choose PBD file")
 st.markdown(
     f"# DNA-methyltransferases classes")
