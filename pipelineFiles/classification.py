@@ -178,7 +178,7 @@ def main():
     df = region_filtration(df)
     # step 2 in pipline step 3
     t = sequence_filtration(df)
-    t[1].to_csv(args.more_than_one_cat_domain, sep='\t')
+    t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
     # step 4 in pipline step 3
