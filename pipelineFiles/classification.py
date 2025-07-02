@@ -167,13 +167,11 @@ def assign_class(model_id, regions, region_coords):
     return '-'
 
 def main():
-    #make parser
-    parser = argparse.ArgumentParser()
-    #add argumnet from console
-    parser.add_argument("--table-with-profile-region-hits")
-    parser.add_argument("--more-than-one-cat-domain")
-    parser.add_argument("--class-output")
-    args = parser.parse_args()
+    df = pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t')
+    #step 1 in pipline step 3
+    df = region_filtration(df)
+    # step 2 in pipline step 3
+    t = sequence_filtration(df)
     #print(args)
     t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
     #step 1 in pipline step 3
