@@ -8,7 +8,8 @@ import sys
 #sys.path.append('./etsv/src/etsv')
 #print(sys.path)
 #sys.path.append('/home/adminuser/venv/src/etsv/src')
-import etsv_ms  # ver. 0.0.2
+sys.path.append('./etsv_ms')
+import etsv  
 
 
 def hmm2aln(aln, hmm_coord):
