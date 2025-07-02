@@ -23,9 +23,9 @@ st.markdown(
         - Running MTase detection and classification [pipeline](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_detection_and_classification)
         - Visualization of pipeline [results](https://mtase-pipeline-6g1yfq9ugw8.streamlit.app/MTase_visualisation)
         ### Overview
-        MTases are classified into [10 classes](https://www.biorxiv.org/content/10.1101/2023.12.13.571470v1).
-        All class are grouped into 10 groups on sequence similarity of catalytic motif (figure below).
+        MTases are classified into [6 classes](https://www.biorxiv.org/content/10.1101/2023.12.13.571470v1).
+        All class are grouped into 6 groups on sequence similarity of catalytic motif (figure below).
     """
     )
 
-st.image('pipelineFiles/Abstract_2.jpg')
+st.image('pipelineFiles/abstract.jpg')
