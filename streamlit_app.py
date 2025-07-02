@@ -2,8 +2,7 @@ import streamlit as st
 
 
 st.set_page_config(
-    page_title="Main Page",  # Вкладка в браузере
-    page_icon=":guardsman:",
+    page_title="Main Page"
 )
 
 
