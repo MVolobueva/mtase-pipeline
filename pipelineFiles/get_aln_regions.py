@@ -7,8 +7,8 @@ from itertools import chain
 import sys
 #sys.path.append('./etsv/src/etsv')
 #print(sys.path)
-sys.path.append('/home/adminuser/venv/src/etsv/src')
-import etsv  # ver. 0.0.2
+#sys.path.append('/home/adminuser/venv/src/etsv/src')
+import etsv_ms  # ver. 0.0.2
 
 
 def hmm2aln(aln, hmm_coord):
