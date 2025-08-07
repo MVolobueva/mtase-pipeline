@@ -57,41 +57,41 @@ def sequence_filtration(df):
     dfcatsam = dfcat.merge(dfsam, on='REBASE_name', suffixes=('_cat', '_sam')).filter(regex="^(?!region_first)")
     return df[~df['REBASE_name'].isin(dfcatsam['REBASE_name'])], dfcatsam
 
-#filter out region sets where Hu2-S1 or Hd2-Hd1 in the start.
-#Hu2-S1 or Hd2-Hd1 could not be at the beginning of the sequence as they should follow cat- or sam-motif
+#filter out region sets where Hu2-S1 or Hd2-Hd3 in the start.
+#Hu2-S1 or Hd2-Hd3 could not be at the beginning of the sequence as they should follow cat- or sam-motif
 def filter_dublicates_1(x, y):
     reg = x.split(',')
     if reg[0] == 'Hu2-S1' and reg.count('Hu2-S1') > 1:
         return ','.join(reg[1:])
-    if reg[0] == 'Hd2-Hd1' and reg.count('Hd2-Hd1') > 1:
+    if reg[0] == 'Hd2-Hd3' and reg.count('Hd2-Hd3') > 1:
         return ','.join(reg[1:])
     else:
         return x
 
-#filter out region sets where Hu2-S1 or Hd2-Hd1 at the beginning of the sequence.
-#Hu2-S1 or Hd2-Hd1 could at the beginning of the sequence as they should follow cat- or sam-motif
+#filter out region sets where Hu2-S1 or Hd2-Hd3 at the beginning of the sequence.
+#Hu2-S1 or Hd2-Hd3 could at the beginning of the sequence as they should follow cat- or sam-motif
 def filter_dublicates_2(x, y):
     reg = x.split(',')
     if reg[0] == 'Hu2-S1' and reg.count('Hu2-S1') > 1:
         return ','.join(y.split(',')[1:])
-    if reg[0] == 'Hd2-Hd1' and reg.count('Hd2-Hd1') > 1:
+    if reg[0] == 'Hd2-Hd3' and reg.count('Hd2-Hd3') > 1:
         return ','.join(y.split(',')[1:])
     else:
         return y
 
-#filter out region sets where Hd3-S5 or S7-S4 at the end of the sequence.
-#Hd3-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
+#filter out region sets where Hd1-S5 or S7-S4 at the end of the sequence.
+#Hd1-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
 def filter_dublicates_3(x, y):
     reg = x.split(',')
-    if reg[-1] == 'Hd3-S5' and reg.count('Hd3-S5') > 1:
+    if reg[-1] == 'Hd1-S5' and reg.count('Hd1-S5') > 1:
         return ','.join(reg[:-1])
     if reg[-1] == 'S7-S4' and reg.count('S7-S4') > 1:
         return ','.join(reg[:-1])
     else:
         return x
 
-#filter out region sets where Hd3-S5 or S7-S4 at the end of the sequence.
-#Hd3-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
+#filter out region sets where Hd1-S5 or S7-S4 at the end of the sequence.
+#Hd1-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
 def filter_dublicates_4(x, y):
     reg = x.split(',')
     if reg[-1] == 'Hu2-S1' and reg.count('Hu2-S1') > 1:
@@ -146,25 +146,25 @@ def assign_class(model_id, regions, region_coords):
         if regions.find('cat_motif') < regions.find('sam_motif'):
             return 'B'
         if regions.find('cat_motif') > regions.find('sam_motif'):
-            if 'Hd2-Hd1' in regions and 'S7-S4' in regions:
+            if 'Hd2-Hd3' in regions and 'S7-S4' in regions:
                 if int(region_coords.split(',')[regions.split(',').index('S7-S4')].split('-')[0]) - \
-                int(region_coords.split(',')[regions.split(',').index('Hd2-Hd1')].split('-')[-1]) < 50:
-                    return 'L'
+                int(region_coords.split(',')[regions.split(',').index('Hd2-Hd3')].split('-')[-1]) < 50:
+                    return 'E'
                 else:
                     return 'D'
             else:
                 return 'D'
     if model_id in [46303, 46923, 45633] and regions.count(',') > 2:
-        if regions[:3] == 'Hd3':
-            return 'K'
+        if regions[:3] == 'Hd1':
+            return 'F'
         else:
             return 'C'
     if model_id in ["New-MTase-profile"] and regions.count(',') > 2:
-        return "I"
+        return "J"
     if model_id in ["Dam"] and regions.count(',') > 2:
-        return "E"
+        return "H"
     if model_id in ["EcoRI_methylase"] and regions.count(',') > 2:
-        return "F"
+        return "I"
     if model_id in ["MT-A70"] and regions.count(',') > 2:
         return "G"
     return '-'
