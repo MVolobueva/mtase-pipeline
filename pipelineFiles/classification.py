@@ -56,33 +56,33 @@ def sequence_filtration(df):
     dfcatsam = dfcat.merge(dfsam, on='REBASE_name', suffixes=('_cat', '_sam')).filter(regex="^(?!region_first)")
     return df[~df['REBASE_name'].isin(dfcatsam['REBASE_name'])], dfcatsam
 
-#filter out region sets where Hu2-S1 or Hd2-Hd1 in the start.
-#Hu2-S1 or Hd2-Hd1 could not be at the beginning of the sequence as they should follow cat- or sam-motif
+#filter out region sets where Hu2-S1 or Hd2-Hd3 in the start.
+#Hu2-S1 or Hd2-Hd3 could not be at the beginning of the sequence as they should follow cat- or sam-motif
 def filter_dublicates_1(x, y):
     reg = x.split(',')
     if reg[0] == 'Hu2-S1' and reg.count('Hu2-S1') > 1:
         return ','.join(reg[1:])
-    if reg[0] == 'Hd2-Hd1' and reg.count('Hd2-Hd1') > 1:
+    if reg[0] == 'Hd2-Hd3' and reg.count('Hd2-Hd3') > 1:
         return ','.join(reg[1:])
     else:
         return x
 
-#filter out region sets where Hu2-S1 or Hd2-Hd1 at the beginning of the sequence.
-#Hu2-S1 or Hd2-Hd1 could at the beginning of the sequence as they should follow cat- or sam-motif
+#filter out region sets where Hu2-S1 or Hd2-Hd3 at the beginning of the sequence.
+#Hu2-S1 or Hd2-Hd3 could at the beginning of the sequence as they should follow cat- or sam-motif
 def filter_dublicates_2(x, y):
     reg = x.split(',')
     if reg[0] == 'Hu2-S1' and reg.count('Hu2-S1') > 1:
         return ','.join(y.split(',')[1:])
-    if reg[0] == 'Hd2-Hd1' and reg.count('Hd2-Hd1') > 1:
+    if reg[0] == 'Hd2-Hd3' and reg.count('Hd2-Hd3') > 1:
         return ','.join(y.split(',')[1:])
     else:
         return y
 
-#filter out region sets where Hd3-S5 or S7-S4 at the end of the sequence.
-#Hd3-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
+#filter out region sets where Hd1-S5 or S7-S4 at the end of the sequence.
+#Hd1-S5 or S7-S4 could not be at the end of the sequence as they should be followed sam- or cat-motif
 def filter_dublicates_3(x, y):
     reg = x.split(',')
-    if reg[-1] == 'Hd3-S5' and reg.count('Hd3-S5') > 1:
+    if reg[-1] == 'Hd1-S5' and reg.count('Hd1-S5') > 1:
         return ','.join(reg[:-1])
     if reg[-1] == 'S7-S4' and reg.count('S7-S4') > 1:
         return ','.join(reg[:-1])
@@ -143,16 +143,16 @@ def assign_class(model_id, regions, region_coords):
         if regions.find('cat_motif') < regions.find('sam_motif'):
             return 'B'
         if regions.find('cat_motif') > regions.find('sam_motif'):
-            if 'Hd2-Hd1' in regions and 'S7-S4' in regions:
+            if 'Hd2-Hd3' in regions and 'S7-S4' in regions:
                 if int(region_coords.split(',')[regions.split(',').index('S7-S4')].split('-')[0]) - \
-                int(region_coords.split(',')[regions.split(',').index('Hd2-Hd1')].split('-')[-1]) < 50:
+                int(region_coords.split(',')[regions.split(',').index('Hd2-Hd3')].split('-')[-1]) < 50:
                     return 'E'
                 else:
                     return 'D'
             else:
                 return 'D'
     if model_id in [46303, 46923, 45633] and regions.count(',') > 2:
-        if regions[:3] == 'Hd3':
+        if regions[:3] == 'Hd1':
             return 'F'
         else:
             return 'C'
@@ -167,27 +167,31 @@ def assign_class(model_id, regions, region_coords):
     return '-'
 
 def main():
-    df = pd.read_csv('./pipelineFiles/region_alignments.tsv', sep='\t')
-    #step 1 in pipline step 3
-    df = region_filtration(df)
-    # step 2 in pipline step 3
-    t = sequence_filtration(df)
+    #make parser
+    parser = argparse.ArgumentParser()
+    #add argumnet from console
+    parser.add_argument("--table-with-profile-region-hits")
+    parser.add_argument("--more-than-one-cat-domain")
+    parser.add_argument("--class-output")
+    args = parser.parse_args()
     #print(args)
-    t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
+    df = pd.read_csv(args.table_with_profile_region_hits, sep='\t')
     #step 1 in pipline step 3
     df = region_filtration(df)
     # step 2 in pipline step 3
     t = sequence_filtration(df)
-    t[1].to_csv('./pipelineFiles/several_cat_domains.tsv', sep='\t')
+    t[1].to_csv(args.more_than_one_cat_domain, sep='\t')
     # step 3 in pipline step 3
     df = set_of_regions(t[0])
     # step 4 in pipline step 3
     df = best_profile(df)
     # step 5 in pipline step 3
     df['New_class'] = df.apply(lambda x: assign_class(x[1], x[2], x[3]), axis=1)
-    df.to_csv('./pipelineFiles/class.tsv', sep='\t')
+    df.to_csv(args.class_output, sep='\t')
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     main()
     print('Finish')
+
+
